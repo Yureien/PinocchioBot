@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+export PREFIX=""
+if [ -z "$CI_JOB_ID" ] && [ -d 'venv' ] ; then
+    export PREFIX="venv/bin/"
+fi
+
+set -x
+
+PYTHONPATH=. ${PREFIX}pylint --fail-under=10.00 --rcfile .pylintrc src
+${PREFIX}autoflake --recursive --exclude "venv" .
+${PREFIX}black --line-length=99 --check .
+${PREFIX}pyflakes $(find . -type d -name 'venv' -prune -o -type f -name '*.py' | grep -v 'venv')

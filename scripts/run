@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+# Use the Python executable provided from the `-p` option, or a default.
+[ "$1" = "-p" ] && PYTHON=$2 || PYTHON="python3"
+
+RUNFILE="main.py"
+VENV="venv"
+
+set -x
+
+if [ -z "$CI_JOB_ID" ] && [ -d "$VENV" ]; then
+    PYTHON="venv/bin/python"
+fi
+
+cd src/
+"../$PYTHON" $RUNFILE

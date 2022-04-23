@@ -1,0 +1,14 @@
+{
+    "editor.formatOnSave": true,
+    "python.pythonPath": "venv/bin/python3.9",
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length=99"
+    ],
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    }
+}
